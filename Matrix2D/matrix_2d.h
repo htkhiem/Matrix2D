@@ -70,7 +70,7 @@ namespace m2d {
 		*/
 		void print() const;
 		/** Checks if this is a square matrix.
-		* \return True if matrix is square and false otherwise.
+		* @return True if matrix is square and false otherwise.
 		*/
 		bool isSquare() const { return (size_x == size_y); }
 		///** Recursively omputes and returns the determinant of this matrix, if it's square.
@@ -82,24 +82,24 @@ namespace m2d {
 	};
 	/** Method to create a matrix from an std::ifstream.
 	* The ifstream must contain a matrix written row-by-row and separated by spaces.
-	* \param ifs: Reference to the ifstream containing input.
-	* \param m: Reference to the target matrix. This function directly modifies its parameter instead of returning its own matrix.
+	* @param ifs: Reference to the ifstream containing input.
+	* @param m: Reference to the target matrix. This function directly modifies its parameter instead of returning its own matrix.
 	*/
 	extern "C" void MATRIX2D_LIB InputMatrix(ifstream &ifs, Matrix2D &m);
 	/** This function concatenates two given matrices horizontally.
 	* The two matrices must have the same row count.
-	* \param left: Reference to the first matrix.
-	* \param right: Reference to the second matrix, which will be concatenated to the right of the first matrix.
-	* \exception range_error() if the two matrices do not have the same row count.
-	* \return A reference to the resulting matrix.
+	* @param left: Reference to the first matrix.
+	* @param right: Reference to the second matrix, which will be concatenated to the right of the first matrix.
+	* @exception range_error() if the two matrices do not have the same row count.
+	* @return A reference to the resulting matrix.
 	*/
 	extern "C" MATRIX2D_LIB Matrix2D &ConcatenateHorizontally(const Matrix2D &left, const Matrix2D &right);
 	/** This function concatenates two given matrices vertically.
 	* The two matrices must have the same column count.
-	* \param top: Reference to the first matrix.
-	* \param bottom: Reference to the second matrix, which will be concatenated below the first matrix.
-	* \return A reference to the resulting matrix.
-	* \exception range_error() if the two matrices do not have the same column count.
+	* @param top: Reference to the first matrix.
+	* @param bottom: Reference to the second matrix, which will be concatenated below the first matrix.
+	* @return A reference to the resulting matrix.
+	* @exception range_error() if the two matrices do not have the same column count.
 	*/
 	extern "C" MATRIX2D_LIB Matrix2D &ConcatenateVertically(const Matrix2D &top, const Matrix2D &bottom);
 
