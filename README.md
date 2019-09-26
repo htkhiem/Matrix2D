@@ -4,7 +4,7 @@ Matrix2D
 Basic 2D double-precision matrix data structure with some useful methods
 packaged into a DLL.
 
-Originally from the matrix_lu_factoriser repository, now made universal for use
+Originally from the LU_factoriser repository, now made universal for use
 with all my hobby projects.
 
 Building instructions
