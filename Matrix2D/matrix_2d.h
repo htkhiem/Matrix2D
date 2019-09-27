@@ -79,6 +79,10 @@ namespace m2d {
 		//* \exception Throws range_error() if this matrix isn't square.
 		//*/
 		//double det() const;
+		/** Method to transpose current matrix.
+		* It writes to a new matrix, deallocates the current one then point *data to the new one.
+		*/
+		void transpose() noexcept;
 	};
 	/** Method to create a matrix from an std::ifstream.
 	* The ifstream must contain a matrix written row-by-row and separated by spaces.

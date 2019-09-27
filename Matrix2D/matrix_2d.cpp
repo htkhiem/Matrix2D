@@ -87,6 +87,22 @@ namespace m2d {
 			return result;
 		}
 	}
+	void Matrix2D::transpose() {
+		double** transposed = new double* [size_y];
+		for (size_t i = 0; i < size_y; i++) {
+			transposed[i] = new double[size_x];
+			for (size_t j = 0; j < size_x; j++) {
+				transposed[i][j] = getAt(i, j);
+			}
+		}
+		for (size_t i = 0; i < size_x; i++) delete[] elem[i];
+		delete[] elem;
+		elem = transposed;
+		size_t temp = size_x;
+		size_x = size_y;
+		size_y = temp;
+		return;
+	}
 }
 
 
