@@ -49,14 +49,12 @@ namespace m2d {
 		}
 	}
 	void Matrix2D::print() const {
-		m.lock();
 		for (size_t x = 0; x < size_x; x++) {
 			for (size_t y = 0; y < size_y; y++) {
 				cout << this->getAt(x, y) << ' ';
 			}
 			cout << endl;
 		}
-		m.unlock();
 	}
 	Matrix2D &ConcatenateHorizontally(const Matrix2D &left, const Matrix2D &right) {
 		if (left.getSizeX() != right.getSizeX())
@@ -101,7 +99,7 @@ namespace m2d {
 			return result;
 		}
 	}
-	void Matrix2D::transpose() {
+	void Matrix2D::transpose() noexcept {
 		double** transposed = new double* [size_y];
 		for (size_t i = 0; i < size_y; i++) {
 			transposed[i] = new double[size_x];
