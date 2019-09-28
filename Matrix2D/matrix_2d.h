@@ -12,6 +12,7 @@
 #include <fstream>
 #include <exception>
 #include <iomanip>
+#include <mutex>
 
 using namespace std;
 namespace m2d {
@@ -22,6 +23,9 @@ namespace m2d {
 		double **elem; /** A 2D array of double-precision floating point numbers. */
 		size_t size_x, size_y; /** Size of this matrix, which must always be initialised. */
 	public:
+		/** Mutex for rudimentary thread safety
+		*/
+		mutex m;
 		/** Simple constructor.
 		* Initialises all elements to zero.
 		* @param size_x: Can be understood as number of rows.
