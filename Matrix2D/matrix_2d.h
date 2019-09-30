@@ -77,12 +77,24 @@ namespace m2d {
 		* @return True if matrix is square and false otherwise.
 		*/
 		bool isSquare() const { return (size_x == size_y); }
-		///** Recursively omputes and returns the determinant of this matrix, if it's square.
-		//* Uses the ordinary hand method of computing determinants. TODO: Implement LUP decomposition instead.
-		//* \return The determinant of this matrix if it's square.
-		//* \exception Throws range_error() if this matrix isn't square.
-		//*/
-		//double det() const;
+		/** Checks if this is an upper triangular matrix. Only square matrices can be triangular.
+		* @return True if matrix is upper-triangular, false otherwise.
+		*/
+		bool isUpperTriangular() const;
+		/** Checks if this is a lower triangular matrix. Only square matrices can be triangular.
+		* @return True if matrix is lower-triangular, false otherwise.
+		*/
+		bool isLowerTriangular() const;
+		/** Checks if this is a diagonal matrix. Only square matrices can be diagonal.
+		* @return True if matrix is diagonal, false otherwise.
+		*/
+		bool isDiagonal() const;
+		/** Recursively omputes and returns the determinant of this matrix, if it's square.
+		* Uses a basic form of LU decomposition (no permutation matrix).
+		* @return The determinant of this matrix if it's square.
+		* @exception Throws range_error() if this matrix isn't square.
+		*/
+		double det() const;
 		/** Method to transpose current matrix.
 		* It writes to a new matrix, deallocates the current one then point *data to the new one.
 		*/

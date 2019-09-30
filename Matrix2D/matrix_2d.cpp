@@ -19,6 +19,8 @@ namespace m2d {
 		}
 		mat.m.unlock();
 	}
+
+	// Constructor and destructor
 	Matrix2D::Matrix2D(size_t size_x, size_t size_y) :
 		size_x(size_x), size_y(size_y) {
 		elem = new double*[size_x];
@@ -30,6 +32,8 @@ namespace m2d {
 		for (size_t i = 0; i < size_x; i++) delete[] elem[i];
 		delete[] elem;
 	}
+
+	// Getter and setter
 	double Matrix2D::getAt(size_t pos_x, size_t pos_y) const {
 		if (pos_x >= size_x || pos_y >= size_y) throw out_of_range("Indices exceeded Matrix2D range.");
 		return elem[pos_x][pos_y];
@@ -48,6 +52,8 @@ namespace m2d {
 			return;
 		}
 	}
+
+	// Display
 	void Matrix2D::print() const {
 		for (size_t x = 0; x < size_x; x++) {
 			for (size_t y = 0; y < size_y; y++) {
@@ -56,6 +62,8 @@ namespace m2d {
 			cout << endl;
 		}
 	}
+
+	// Concatenators
 	Matrix2D &ConcatenateHorizontally(const Matrix2D &left, const Matrix2D &right) {
 		if (left.getSizeX() != right.getSizeX())
 			throw range_error("Cannot horizontally concatenate two matrices with different row counts.");
@@ -88,6 +96,8 @@ namespace m2d {
 		}
 		return result;
 	}
+
+	// Submatrix extractor
 	Matrix2D &Matrix2D::subMatrix(size_t pos_x, size_t pos_y, size_t sub_size_x, size_t sub_size_y) {
 		if (pos_x + sub_size_x - 1 > size_x || pos_y + sub_size_y - 1 > size_y)
 			throw range_error("Submatrix is out of bounds.");
@@ -99,6 +109,8 @@ namespace m2d {
 			return result;
 		}
 	}
+
+	// Transposer
 	void Matrix2D::transpose() noexcept {
 		double** transposed = new double* [size_y];
 		for (size_t i = 0; i < size_y; i++) {
@@ -115,6 +127,37 @@ namespace m2d {
 		size_y = temp;
 		return;
 	}
+
+	// Bool checks
+	bool Matrix2D::isUpperTriangular() const {
+		if (!isSquare()) return false;
+		for (size_t x = 1; x < size_x x++) {
+			for (size_t y = 0; y < x; y++) {
+				if (getAt(x, y) != 0) return false;
+			}
+		}
+		return true;
+	}
+
+	bool Matrix2D::isLowerTriangular() const {
+		if (!isSquare()) return false;
+		for (size_t x = 0; x < size_x x++) {
+			for (size_t y = x + 1; y < size_y; y++) {
+				if (getAt(x, y) != 0) return false;
+			}
+		}
+		return true;
+	}
+	bool Matrix2D::isDiagonal() const {
+		if (!isSquare()) return false;
+		for (size_t x = 0; x < size_x; x++) {
+			for (size_t y = 0; y < size_y; y++) {
+				if (x != y && getAt(x, y) != 0) return false;
+			}
+		}
+		return true;
+	}
+
 }
 
 
