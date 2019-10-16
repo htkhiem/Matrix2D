@@ -131,17 +131,16 @@ namespace m2d {
 	// Bool checks
 	bool Matrix2D::isUpperTriangular() const {
 		if (!isSquare()) return false;
-		for (size_t x = 1; x < size_x x++) {
+		for (size_t x = 1; x < size_x; x++) {
 			for (size_t y = 0; y < x; y++) {
 				if (getAt(x, y) != 0) return false;
 			}
 		}
 		return true;
 	}
-
 	bool Matrix2D::isLowerTriangular() const {
 		if (!isSquare()) return false;
-		for (size_t x = 0; x < size_x x++) {
+		for (size_t x = 0; x < size_x; x++) {
 			for (size_t y = x + 1; y < size_y; y++) {
 				if (getAt(x, y) != 0) return false;
 			}
