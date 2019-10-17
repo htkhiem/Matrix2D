@@ -130,15 +130,21 @@ namespace m2d {
 	}
 
 	// Simple determinant calculator. It assumes that the permutation matrix has determinant 1.
-	//double Matrix2D::det() const {
-	//	if (!isSquare()) throw invalid_argument("Cannot compute determinant of non-square matrices.");
-	//	double result = 1;
-	//	Matrix2D L, U;
+	double Matrix2D::det() const {
+		if (!isSquare()) throw invalid_argument("Cannot compute determinant of non-square matrices.");
+		double result = 1;
+		Matrix2D L(size_x, size_x), U(size_x, size_x);
 
-	//	for (size_t i = 0; i < size_x; i++) {
-	//		result *= 
-	//	}
-	//}
+		// Factorise current matrix into lower and upper halves.
+		LUFactorizeDoolittle(*this, L, U);
+
+		// det(A) = 1*det(L)*det(U), with determinants of triangular matrices being the product of their diagonals.
+		for (size_t i = 0; i < size_x; i++) {
+			result *= L.getAt(i, i);
+			result *= U.getAt(i, i);
+		}
+		return result;
+	}
 
 	// Bool checks
 	bool Matrix2D::isUpperTriangular() const {
