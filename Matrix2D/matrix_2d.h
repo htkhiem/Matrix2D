@@ -14,6 +14,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <cmath>
 #include <exception>
 #include <iomanip>
 #include <mutex>
@@ -104,6 +105,30 @@ namespace m2d {
 		* @return The determinant of this matrix if it's square.
 		* @exception Throws range_error() if this matrix isn't square.
 		*/
+
+		/// Matrix arithmetics
+		/** Adds two matrices together, provided they're of the same size.
+		* @return The resulting matrix.
+		* @exception Throws invalid_argument() if the size of the matrices do not match.
+		*/
+		Matrix2D operator+(Matrix2D& other);
+		/** Subtract another matrix from this matrix, provided they're of the same size.
+		* @return The resulting matrix.
+		* @exception Throws invalid_argument() if the size of the matrices do not match.
+		*/
+		Matrix2D operator-(Matrix2D& other);
+		/** Multiply two matrices, provided this matrix's size_y is the same as the other's size_x.
+		* @return The resulting matrix. Note that the resulting matrix might have a different size.
+		* @exception Throws invalid_argument() if the sizes do not match the above criterion.
+		*/
+		Matrix2D operator*(Matrix2D& other);
+		/** Inverts this matrix. Not always possible.
+		* @return The inverted matrix. Note that it also modifies the current matrix's value to that of the inverted one.
+		* @exception Throws invalid_argument() if the size of the matrices do not match.
+		*/
+		void invert();
+
+
 		
 		double det() const;
 		/** Method to transpose current matrix.

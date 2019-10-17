@@ -6,6 +6,8 @@
 #ifndef MATRIX2D_1D_TOOLS
 #define MATRIX2D_1D_TOOLS
 
+#include "matrix_2d.h"
+
 
 
 #endif // MATRIX2D_1D_TOOLS
