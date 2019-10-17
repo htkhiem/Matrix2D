@@ -93,11 +93,18 @@ namespace m2d {
 		* @return True if matrix is diagonal, false otherwise.
 		*/
 		bool isDiagonal() const;
-		/** Recursively omputes and returns the determinant of this matrix, if it's square.
+		/**
+		* Checks if this matrix is diagonally-dominant, that is, the sum of the absolute values of all elements
+		* except the diagonal one in a row is less than the diagonal element.
+		* @return True if it is diagonally dominant, false if it's not, or if it's non-square.
+		*/
+		bool isDiagonallyDominant() const;
+		/** Computes and returns the determinant of this matrix, if it's square.
 		* Uses a basic form of LU decomposition (assumes det(P) = 1).
 		* @return The determinant of this matrix if it's square.
 		* @exception Throws range_error() if this matrix isn't square.
 		*/
+		
 		double det() const;
 		/** Method to transpose current matrix.
 		* It writes to a new matrix, deallocates the current one then point *data to the new one.

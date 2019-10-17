@@ -174,6 +174,17 @@ namespace m2d {
 		}
 		return true;
 	}
+	bool Matrix2D::isDiagonallyDominant() const {
+		if (!isSquare()) return false;
+		for (size_t x = 0; x < size_x; x++) {
+			double row_sum = 0;
+			for (size_t y = 0; y < size_y; y++) {
+				if (x != y) row_sum += fabs(getAt(x, y));
+			}
+			if (row_sum >= getAt(x, x)) return false;
+		}
+		return true;
+	}
 
 }
 
