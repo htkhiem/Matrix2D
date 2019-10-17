@@ -2,6 +2,10 @@
  * @file matrix_2d.h
  * Interface to general double-precision 2D matrices.
  */
+
+#ifndef MATRIX2D_BASE
+#define MATRIX2D_BASE
+
 #ifdef MATRIX2D_EXPORTS
 #define MATRIX2D_LIB __declspec(dllexport) // dll building
 #else
@@ -90,13 +94,15 @@ namespace m2d {
 		*/
 		bool isDiagonal() const;
 		/** Recursively omputes and returns the determinant of this matrix, if it's square.
-		* Uses a basic form of LU decomposition (no permutation matrix).
+		* Uses a basic form of LU decomposition (assumes det(P) = 1).
 		* @return The determinant of this matrix if it's square.
 		* @exception Throws range_error() if this matrix isn't square.
 		*/
 		double det() const;
 		/** Method to transpose current matrix.
 		* It writes to a new matrix, deallocates the current one then point *data to the new one.
+		* @return The determinant, as a double-precision value.
+		* @exception invalid_argument() if this matrix isn't square.
 		*/
 		void transpose() noexcept;
 	};
@@ -124,4 +130,6 @@ namespace m2d {
 	extern "C" MATRIX2D_LIB Matrix2D &ConcatenateVertically(const Matrix2D &top, const Matrix2D &bottom);
 
 }
+
+#endif // MATRIX2D_BASE
  

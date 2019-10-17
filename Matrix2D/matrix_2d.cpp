@@ -4,6 +4,7 @@
 */
 #include "stdafx.h"
 #include "matrix_2d.h"
+#include "lu_factorisation.h" // for determinant
 
 using namespace std;
 
@@ -127,6 +128,17 @@ namespace m2d {
 		size_y = temp;
 		return;
 	}
+
+	// Simple determinant calculator. It assumes that the permutation matrix has determinant 1.
+	//double Matrix2D::det() const {
+	//	if (!isSquare()) throw invalid_argument("Cannot compute determinant of non-square matrices.");
+	//	double result = 1;
+	//	Matrix2D L, U;
+
+	//	for (size_t i = 0; i < size_x; i++) {
+	//		result *= 
+	//	}
+	//}
 
 	// Bool checks
 	bool Matrix2D::isUpperTriangular() const {
