@@ -29,6 +29,14 @@ namespace m2d {
 			elem[i] = new double[size_y] {0};
 		}
 	}
+	Matrix2D::Matrix2D(const Matrix2D& src):
+	Matrix2D(src.getSizeX(), src.getSizeY()) {
+		for (size_t x = 0; x < src.getSizeX(); x++) {
+			for (size_t y = 0; y < src.getSizeY(); y++) {
+				setAt(x, y, src.getAt(x, y));
+			}
+		}
+	}
 	Matrix2D::~Matrix2D() {
 		for (size_t i = 0; i < size_x; i++) delete[] elem[i];
 		delete[] elem;
@@ -184,6 +192,50 @@ namespace m2d {
 			if (row_sum >= getAt(x, x)) return false;
 		}
 		return true;
+	}
+
+	// Arithmetics
+	Matrix2D Matrix2D::operator+(const Matrix2D& other) const {
+		if (size_x != other.getSizeX() || getSizeY() != other.getSizeY()) 
+			throw invalid_argument("Cannot add two matrices of different dimensions.");
+		Matrix2D result(size_x, size_y);
+		for (size_t x = 0; x < size_x; x++) {
+			for (size_t y = 0; y < size_y; y++) {
+				result.setAt(x, y, getAt(x, y) + other.getAt(x, y));
+			}
+		}
+		return result;
+	}
+	Matrix2D Matrix2D::operator-(const Matrix2D& other) const {
+		if (getSizeX() != other.getSizeX() || getSizeY() != other.getSizeY())
+			throw invalid_argument("Cannot subtract two matrices of different dimensions.");
+		Matrix2D result(size_x, size_y);
+		for (size_t x = 0; x < size_x; x++) {
+			for (size_t y = 0; y < size_y; y++) {
+				result.setAt(x, y, getAt(x, y) - other.getAt(x, y));
+			}
+		}
+		return result;
+
+	}
+	Matrix2D Matrix2D::operator*(const Matrix2D& other) const {
+		if (size_y != other.getSizeX()) 
+			throw invalid_argument("Cannot multiply these matrices: incompatible dimensions.");
+		Matrix2D result(size_x, other.getSizeY());
+		for (size_t x = 0; x < size_x; x++) {
+			for (size_t y = 0; y < other.getSizeY(); y++) {
+				double temp = 0;
+				for (size_t row_idx = 0; row_idx < size_y; row_idx++) {
+					for (size_t col_idx = 0; col_idx < other.getSizeX(); col_idx++) {
+						temp += getAt(x, row_idx) * other.getAt(y, col_idx);
+					}
+				}
+				result.setAt(x, y, temp);
+			}
+		}
+		return result;
+	}
+	void Matrix2D::invert() {
 	}
 
 }

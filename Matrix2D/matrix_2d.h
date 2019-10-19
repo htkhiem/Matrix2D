@@ -37,6 +37,10 @@ namespace m2d {
 		* @param size_y: Can be understood as number of columns.
 		*/
 		Matrix2D(size_t size_x, size_t size_y);
+		/** Copy constructor
+		* @param src: The source Matrix2D object to copy from.
+		*/
+		Matrix2D(const Matrix2D& src);
 		/** Destructor.
 		* Deallocates 2D double array.
 		*/
@@ -111,17 +115,17 @@ namespace m2d {
 		* @return The resulting matrix.
 		* @exception Throws invalid_argument() if the size of the matrices do not match.
 		*/
-		Matrix2D operator+(Matrix2D& other);
+		Matrix2D operator+(const Matrix2D& other) const;
 		/** Subtract another matrix from this matrix, provided they're of the same size.
 		* @return The resulting matrix.
 		* @exception Throws invalid_argument() if the size of the matrices do not match.
 		*/
-		Matrix2D operator-(Matrix2D& other);
+		Matrix2D operator-(const Matrix2D& other) const;
 		/** Multiply two matrices, provided this matrix's size_y is the same as the other's size_x.
 		* @return The resulting matrix. Note that the resulting matrix might have a different size.
 		* @exception Throws invalid_argument() if the sizes do not match the above criterion.
 		*/
-		Matrix2D operator*(Matrix2D& other);
+		Matrix2D operator*(const Matrix2D& other) const;
 		/** Inverts this matrix. Not always possible.
 		* @return The inverted matrix. Note that it also modifies the current matrix's value to that of the inverted one.
 		* @exception Throws invalid_argument() if the size of the matrices do not match.
