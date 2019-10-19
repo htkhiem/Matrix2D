@@ -72,7 +72,7 @@ namespace m2d {
 	}
 
 	// Concatenators
-	Matrix2D &ConcatenateHorizontally(const Matrix2D &left, const Matrix2D &right) {
+	Matrix2D ConcatenateHorizontally(const Matrix2D &left, const Matrix2D &right) {
 		if (left.getSizeX() != right.getSizeX())
 			throw range_error("Cannot horizontally concatenate two matrices with different row counts.");
 		Matrix2D result(left.getSizeX(), left.getSizeY() + right.getSizeY()); // TODO: warn if overflow
@@ -88,7 +88,7 @@ namespace m2d {
 		}
 		return result;
 	}
-	Matrix2D &ConcatenateVertically(const Matrix2D &top, const Matrix2D &bottom) {
+	Matrix2D ConcatenateVertically(const Matrix2D &top, const Matrix2D &bottom) {
 		if (top.getSizeY() != bottom.getSizeY())
 			throw range_error("Cannot vertically concatenate two matrices with different column counts.");
 		Matrix2D result(top.getSizeX() + bottom.getSizeX(), top.getSizeY()); // TODO: warn if overflow
@@ -106,7 +106,7 @@ namespace m2d {
 	}
 
 	// Submatrix extractor
-	Matrix2D &Matrix2D::subMatrix(size_t pos_x, size_t pos_y, size_t sub_size_x, size_t sub_size_y) const {
+	Matrix2D Matrix2D::subMatrix(size_t pos_x, size_t pos_y, size_t sub_size_x, size_t sub_size_y) const {
 		if (pos_x + sub_size_x - 1 > size_x || pos_y + sub_size_y - 1 > size_y)
 			throw range_error("Submatrix is out of bounds.");
 		Matrix2D result(sub_size_x, sub_size_y);
@@ -114,12 +114,12 @@ namespace m2d {
 			for (size_t y = 0; y < sub_size_y; y++) {
 				result.setAt(x, y, this->getAt(pos_x + x, pos_y + y));
 			}
-			return result;
 		}
+		return result;
 	}
 
 	// Cofactor methods
-	Matrix2D& Matrix2D::cofactorOf(size_t pos_x, size_t pos_y) const {
+	Matrix2D Matrix2D::cofactorOf(size_t pos_x, size_t pos_y) const {
 		Matrix2D cof(size_x - 1, size_y - 1);
 		size_t cof_x = 0, cof_y = 0; // indices for cofactor
 		for (size_t x = 0; x < size_x; x++) { // indices to iterate over source matrix (this one)
@@ -208,7 +208,7 @@ namespace m2d {
 	}
 
 	// Arithmetics
-	Matrix2D &Matrix2D::operator+(const Matrix2D& other) const {
+	Matrix2D Matrix2D::operator+(const Matrix2D& other) const {
 		if (size_x != other.getSizeX() || getSizeY() != other.getSizeY()) 
 			throw invalid_argument("Cannot add two matrices of different dimensions.");
 		Matrix2D result(size_x, size_y);
@@ -219,7 +219,7 @@ namespace m2d {
 		}
 		return result;
 	}
-	Matrix2D &Matrix2D::operator-(const Matrix2D& other) const {
+	Matrix2D Matrix2D::operator-(const Matrix2D& other) const {
 		if (getSizeX() != other.getSizeX() || getSizeY() != other.getSizeY())
 			throw invalid_argument("Cannot subtract two matrices of different dimensions.");
 		Matrix2D result(size_x, size_y);
@@ -231,7 +231,7 @@ namespace m2d {
 		return result;
 
 	}
-	Matrix2D &Matrix2D::operator*(const Matrix2D& other) const {
+	Matrix2D Matrix2D::operator*(const Matrix2D& other) const {
 		if (size_y != other.getSizeX()) 
 			throw invalid_argument("Cannot multiply these matrices: incompatible dimensions.");
 		Matrix2D result(size_x, other.getSizeY());

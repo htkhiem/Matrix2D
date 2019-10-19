@@ -77,18 +77,18 @@ namespace m2d {
 		* @exception Throws range_error() if the submatrix exceeds the source's range, for example when its
 		* top-left element is at the bottom-right of the source and its size is larger than 1 in any direction.
 		*/
-		Matrix2D &subMatrix(size_t pos_x, size_t pos_y, size_t sub_size_x, size_t sub_size_y) const;
+		Matrix2D subMatrix(size_t pos_x, size_t pos_y, size_t sub_size_x, size_t sub_size_y) const;
 		/** Returns the cofactor of an element specified by its indices.
 		* @param pos_x: The row-index of the specified element.
 		* @param pos_y: The column-index of the specified element.
 		* @return The cofactor of that element, as a matrix.
 		* @exception: Throws range_error() if the supplied indices are out-of-range.
 		*/
-		Matrix2D& cofactorOf(size_t pos_x, size_t pos_y) const;
+		Matrix2D cofactorOf(size_t pos_x, size_t pos_y) const;
 		/** Computes the cofactor matrix of this matrix.
 		* @return The cofactor matrix, through a copy constructor.
 		*/
-		Matrix2D& cofactorMatrix();
+		Matrix2D cofactorMatrix();
 		/** Prints the matrix.
 		* Format: space-separated for now, iomanip later.
 		*/
@@ -126,17 +126,17 @@ namespace m2d {
 		* @return The resulting matrix.
 		* @exception Throws invalid_argument() if the size of the matrices do not match.
 		*/
-		Matrix2D &operator+(const Matrix2D& other) const;
+		Matrix2D operator+(const Matrix2D& other) const;
 		/** Subtract another matrix from this matrix, provided they're of the same size.
 		* @return The resulting matrix.
 		* @exception Throws invalid_argument() if the size of the matrices do not match.
 		*/
-		Matrix2D &operator-(const Matrix2D& other) const;
+		Matrix2D operator-(const Matrix2D& other) const;
 		/** Multiply two matrices, provided this matrix's size_y is the same as the other's size_x.
 		* @return The resulting matrix. Note that the resulting matrix might have a different size.
 		* @exception Throws invalid_argument() if the sizes do not match the above criterion.
 		*/
-		Matrix2D &operator*(const Matrix2D& other) const;
+		Matrix2D operator*(const Matrix2D& other) const;
 		/** Inverts this matrix. Not always possible.
 		* @return The inverted matrix. Note that it also modifies the current matrix's value to that of the inverted one.
 		*/
@@ -168,7 +168,7 @@ namespace m2d {
 	* @exception range_error() if the two matrices do not have the same row count.
 	* @return A reference to the resulting matrix.
 	*/
-	extern "C" MATRIX2D_LIB Matrix2D &ConcatenateHorizontally(const Matrix2D &left, const Matrix2D &right);
+	MATRIX2D_LIB Matrix2D ConcatenateHorizontally(const Matrix2D &left, const Matrix2D &right);
 	/** This function concatenates two given matrices vertically.
 	* The two matrices must have the same column count.
 	* @param top: Reference to the first matrix.
@@ -176,7 +176,7 @@ namespace m2d {
 	* @return A reference to the resulting matrix.
 	* @exception range_error() if the two matrices do not have the same column count.
 	*/
-	extern "C" MATRIX2D_LIB Matrix2D &ConcatenateVertically(const Matrix2D &top, const Matrix2D &bottom);
+	MATRIX2D_LIB Matrix2D ConcatenateVertically(const Matrix2D &top, const Matrix2D &bottom);
 	/** LU-Factoriser implementing Doolittle's method.
 	* In accordance with Doolittle's method, it assumes the diagonal of the lower matrix L to be 1s (ones).
 	* \param A: The source matrix, which must be square.
