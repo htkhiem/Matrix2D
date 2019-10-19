@@ -4,7 +4,6 @@
 */
 #include "stdafx.h"
 #include "matrix_2d.h"
-#include "lu_factorisation.h" // for determinant
 
 using namespace std;
 
@@ -107,7 +106,7 @@ namespace m2d {
 	}
 
 	// Submatrix extractor
-	Matrix2D &Matrix2D::subMatrix(size_t pos_x, size_t pos_y, size_t sub_size_x, size_t sub_size_y) {
+	Matrix2D &Matrix2D::subMatrix(size_t pos_x, size_t pos_y, size_t sub_size_x, size_t sub_size_y) const {
 		if (pos_x + sub_size_x - 1 > size_x || pos_y + sub_size_y - 1 > size_y)
 			throw range_error("Submatrix is out of bounds.");
 		Matrix2D result(sub_size_x, sub_size_y);
@@ -117,6 +116,20 @@ namespace m2d {
 			}
 			return result;
 		}
+	}
+
+	// Cofactor methods
+	Matrix2D& Matrix2D::cofactorOf(size_t pos_x, size_t pos_y) const {
+		Matrix2D cof(size_x - 1, size_y - 1);
+		size_t cof_x = 0, cof_y = 0; // indices for cofactor
+		for (size_t x = 0; x < size_x; x++) { // indices to iterate over source matrix (this one)
+			for (size_t y = 0; y < size_y; y++) {
+				if (x != pos_x || y != pos_y) { // skip row and column that the target element is in
+					cof.setAt(cof_x++, cof_y++, getAt(x, y));
+				}
+			}
+		}
+		return cof;
 	}
 
 	// Transposer
@@ -237,9 +250,4 @@ namespace m2d {
 	}
 	void Matrix2D::invert() {
 	}
-
 }
-
-
-
-

@@ -24,9 +24,6 @@
     <ClInclude Include="matrix_2d.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="lu_factorisation.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="vector_tools.h">
       <Filter>Header Files</Filter>
     </ClInclude>

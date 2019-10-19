@@ -15,7 +15,7 @@
 #include <iostream>
 #include <fstream>
 #include <cmath>
-#include <exception>
+#include <stdexcept>
 #include <iomanip>
 #include <mutex>
 
@@ -77,10 +77,18 @@ namespace m2d {
 		* @exception Throws range_error() if the submatrix exceeds the source's range, for example when its
 		* top-left element is at the bottom-right of the source and its size is larger than 1 in any direction.
 		*/
-		Matrix2D &subMatrix(size_t pos_x, size_t pos_y, size_t sub_size_x, size_t sub_size_y);
+		Matrix2D &subMatrix(size_t pos_x, size_t pos_y, size_t sub_size_x, size_t sub_size_y) const;
+		/** Returns the cofactor of an element specified by its indices.
+		* @param pos_x: The row-index of the specified element.
+		* @param pos_y: The column-index of the specified element.
+		* @return The cofactor of that element, as a matrix.
+		* @exception: Throws range_error() if the supplied indices are out-of-range.
+		*/
+		Matrix2D& cofactorOf(size_t pos_x, size_t pos_y) const;
 		/** Computes the cofactor matrix of this matrix.
 		* @return The cofactor matrix, through a copy constructor.
 		*/
+		Matrix2D& cofactorMatrix();
 		/** Prints the matrix.
 		* Format: space-separated for now, iomanip later.
 		*/
@@ -144,6 +152,9 @@ namespace m2d {
 		*/
 		void transpose() noexcept;
 	};
+
+	// Non-member functions
+
 	/** Method to create a matrix from an std::ifstream.
 	* The ifstream must contain a matrix written row-by-row and separated by spaces.
 	* @param ifs: Reference to the ifstream containing input.
@@ -166,7 +177,22 @@ namespace m2d {
 	* @exception range_error() if the two matrices do not have the same column count.
 	*/
 	extern "C" MATRIX2D_LIB Matrix2D &ConcatenateVertically(const Matrix2D &top, const Matrix2D &bottom);
-
+	/** LU-Factoriser implementing Doolittle's method.
+	* In accordance with Doolittle's method, it assumes the diagonal of the lower matrix L to be 1s (ones).
+	* \param A: The source matrix, which must be square.
+	* \param L: The lower triangular matrix, passed as reference to be written to. In this method, its diagonal is assumed to be 1s.
+	* \param U: The upper triangular matrix, also passed as reference.
+	* \exception range_error(): Throws when matrix A is not factorizable.
+	*/
+	extern "C" MATRIX2D_LIB void LUFactorizeDoolittle(const Matrix2D& A, Matrix2D& L, Matrix2D& U);
+	/** LU-Factoriser implementing Crout's method.
+	* In accordance with Crout's method, it assumes the diagonal of the upper matrix U to be 1s (ones).
+	* \param A: The source matrix, which must be square.
+	* \param L: The lower triangular matrix, passed as reference to be written to.
+	* \param U: The upper triangular matrix, also passed as reference. In this method, its diagonal is assumed to be 1s.
+	* \exception range_error(): Throws when matrix A is not factorizable.
+	*/
+	extern "C" MATRIX2D_LIB void LUFactorizeCrout(const Matrix2D& A, Matrix2D& L, Matrix2D& U);
 }
 
 #endif // MATRIX2D_BASE

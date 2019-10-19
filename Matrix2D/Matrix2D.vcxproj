@@ -147,7 +147,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="lu_factorisation.h" />
     <ClInclude Include="matrix_2d.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
