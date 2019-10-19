@@ -195,7 +195,7 @@ namespace m2d {
 	}
 
 	// Arithmetics
-	Matrix2D Matrix2D::operator+(const Matrix2D& other) const {
+	Matrix2D &Matrix2D::operator+(const Matrix2D& other) const {
 		if (size_x != other.getSizeX() || getSizeY() != other.getSizeY()) 
 			throw invalid_argument("Cannot add two matrices of different dimensions.");
 		Matrix2D result(size_x, size_y);
@@ -206,7 +206,7 @@ namespace m2d {
 		}
 		return result;
 	}
-	Matrix2D Matrix2D::operator-(const Matrix2D& other) const {
+	Matrix2D &Matrix2D::operator-(const Matrix2D& other) const {
 		if (getSizeX() != other.getSizeX() || getSizeY() != other.getSizeY())
 			throw invalid_argument("Cannot subtract two matrices of different dimensions.");
 		Matrix2D result(size_x, size_y);
@@ -218,7 +218,7 @@ namespace m2d {
 		return result;
 
 	}
-	Matrix2D Matrix2D::operator*(const Matrix2D& other) const {
+	Matrix2D &Matrix2D::operator*(const Matrix2D& other) const {
 		if (size_y != other.getSizeX()) 
 			throw invalid_argument("Cannot multiply these matrices: incompatible dimensions.");
 		Matrix2D result(size_x, other.getSizeY());

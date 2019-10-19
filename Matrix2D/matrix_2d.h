@@ -67,7 +67,7 @@ namespace m2d {
 		* @return The matrix's column count as std::size_t.
 		*/
 		size_t getSizeY() const { return size_y; }
-		/** Mathod to extract a submatrix from the current matrix.
+		/** Method to extract a submatrix from the current matrix.
 		* The submatrix is defined by the position of its top-left element and its size (counting from that element).
 		* @param pos_x: x-position of the top-left element of the desired submatrix.
 		* @param pos_y: x-position of the top-left element of the desired submatrix.
@@ -78,6 +78,9 @@ namespace m2d {
 		* top-left element is at the bottom-right of the source and its size is larger than 1 in any direction.
 		*/
 		Matrix2D &subMatrix(size_t pos_x, size_t pos_y, size_t sub_size_x, size_t sub_size_y);
+		/** Computes the cofactor matrix of this matrix.
+		* @return The cofactor matrix, through a copy constructor.
+		*/
 		/** Prints the matrix.
 		* Format: space-separated for now, iomanip later.
 		*/
@@ -115,20 +118,19 @@ namespace m2d {
 		* @return The resulting matrix.
 		* @exception Throws invalid_argument() if the size of the matrices do not match.
 		*/
-		Matrix2D operator+(const Matrix2D& other) const;
+		Matrix2D &operator+(const Matrix2D& other) const;
 		/** Subtract another matrix from this matrix, provided they're of the same size.
 		* @return The resulting matrix.
 		* @exception Throws invalid_argument() if the size of the matrices do not match.
 		*/
-		Matrix2D operator-(const Matrix2D& other) const;
+		Matrix2D &operator-(const Matrix2D& other) const;
 		/** Multiply two matrices, provided this matrix's size_y is the same as the other's size_x.
 		* @return The resulting matrix. Note that the resulting matrix might have a different size.
 		* @exception Throws invalid_argument() if the sizes do not match the above criterion.
 		*/
-		Matrix2D operator*(const Matrix2D& other) const;
+		Matrix2D &operator*(const Matrix2D& other) const;
 		/** Inverts this matrix. Not always possible.
 		* @return The inverted matrix. Note that it also modifies the current matrix's value to that of the inverted one.
-		* @exception Throws invalid_argument() if the size of the matrices do not match.
 		*/
 		void invert();
 
