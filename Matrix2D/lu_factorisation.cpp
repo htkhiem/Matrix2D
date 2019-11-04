@@ -30,7 +30,7 @@ namespace m2d {
 					sum_ikj += L.getAt(i, k) * U.getAt(k, j);
 					sum_jki += L.getAt(j, k) * U.getAt(k, i);
 				}
-				U.setAt(i, j, A.getAt(i, j) - sum_ikj);
+				U.setAt(i, j, (A.getAt(i, j) - sum_ikj) / L.getAt(i, i));
 				L.setAt(j, i, (A.getAt(j, i) - sum_jki) / U.getAt(i, i));
 				L.print();
 			}
@@ -66,7 +66,7 @@ namespace m2d {
 					sum_jki += L.getAt(j, k) * U.getAt(k, i);
 				}
 				U.setAt(i, j, (A.getAt(i, j) - sum_ikj) / L.getAt(i, i));
-				L.setAt(j, i, A.getAt(j, i) - sum_jki);
+				L.setAt(j, i, (A.getAt(j, i) - sum_jki) / U.getAt(i, i));
 			}
 		}
 		double sum_nin = 0;

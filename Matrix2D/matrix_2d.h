@@ -17,7 +17,6 @@
 #include <cmath>
 #include <stdexcept>
 #include <iomanip>
-#include <mutex>
 
 using namespace std;
 namespace m2d {
@@ -28,9 +27,6 @@ namespace m2d {
 		double **elem; /** A 2D array of double-precision floating point numbers. */
 		size_t size_x, size_y; /** Size of this matrix, which must always be initialised. */
 	public:
-		/** Mutex for rudimentary thread safety
-		*/
-		mutex m;
 		/** Simple constructor.
 		* Initialises all elements to zero.
 		* @param size_x: Can be understood as number of rows.
@@ -50,6 +46,7 @@ namespace m2d {
 		* @param pos_x: Row index of desired value.
 		* @param pos_y: Column index of desired value.
 		* @return a copy of the value at that location.
+		* @exception: out_of_range() if supplied pos_x and/or pos_y are out-of-range of this matrix.
 		*/
 		double getAt(size_t pos_x, size_t pos_y) const;
 		/** Setter method
@@ -57,6 +54,7 @@ namespace m2d {
 		* @param pos_x: Row index of target cell.
 		* @param pos_y: Column index of target cell.
 		* @param val: Value to be set to target cell.
+		* @exception: out_of_range() if supplied pos_x and/or pos_y are out-of-range of this matrix. 
 		*/
 		void setAt(size_t pos_x, size_t pos_y, double val);
 		/** Method to get row count.

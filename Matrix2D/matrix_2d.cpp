@@ -10,14 +10,12 @@ using namespace std;
 namespace m2d {
 	void InputMatrix(ifstream &ifs, Matrix2D &mat) {
 		double temp;
-		mat.m.lock();
-		for (size_t l = 0; l < mat.getSizeX(); l++) {
+		for (size_t r = 0; r < mat.getSizeX(); r++) {
 			for (size_t c = 0; c < mat.getSizeY(); c++) {
 				ifs >> temp;
-				mat.setAt(l, c, temp);
+				mat.setAt(r, c, temp);
 			}
 		}
-		mat.m.unlock();
 	}
 
 	// Constructor and destructor
@@ -47,16 +45,13 @@ namespace m2d {
 		return elem[pos_x][pos_y];
 	}
 	void Matrix2D::setAt(size_t pos_x, size_t pos_y, double val) {
-		m.lock();
 		try {
 			if (pos_x >= size_x || pos_y >= size_y) throw out_of_range("Indices exceeded Matrix2D range.");
 			elem[pos_x][pos_y] = val;
-			m.unlock();
 			return;
 		}
 		catch (out_of_range &e) {
 			cerr << e.what();
-			m.unlock();
 			return;
 		}
 	}
